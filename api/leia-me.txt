@@ -1,0 +1,26 @@
+**COMO USAR**
+
+NECESSEÁRIO:
+    - NODE
+    - DOCKER
+    - GERENCIADOR DE BANCO DE DADOS (OPCIONAL)
+
+PASSOS PARA INICIAR:
+    - docker componse up -d ou docker-compose up -d
+    - bun i ou npm i
+    - bun dev ou npm run dev
+
+DEPENDENCIAS:
+    - bcryptjs: Para criptografia
+    - cookie-parser: Para salvar informações sigilosas e reutilizaveis no cookie
+    - cors: Serve para possibilitar o client a se conectar ao Servidor
+    - dotenv: Serve para configurar variaveis de ambientes no desenvolvimento de forma segura
+    - express: principal framework node para o desenvolvimento de web api
+    - http-status-code: é usando para emitir explicitamente no codigo o tipo de error que será retornado
+    - jsonwebtoken: É usado para válidar o usuário
+    - pg: biblioteca expecificamente para o banco postgresSQL, permitindo o uso de comandos SQL diretamente do codigo
+    - tsx: biblioteca usada para executar typescript sem precisar compilar
+    - uuid: biblioteca usada para gerar id único
+    - zod: biblioteca para padronizar e receber dados enviados do client
+
+OBS: ANTES DE INICIAR OS PASSOS REMOVER O .exemple do arquivo .env.exemple e certifique que seu terminal está em /api
