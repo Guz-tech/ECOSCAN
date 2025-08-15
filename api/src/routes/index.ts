@@ -8,4 +8,4 @@ export const routes = Router();
 routes.use("/", baseRoutes);
 // routes.use("/auth", authRoute);
 // routes.use("/login", loginRoute);
-routes.use("/user", usersRoutes);
+routes.use("/", usersRoutes);

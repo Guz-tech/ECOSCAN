@@ -10,9 +10,9 @@ export const create =
 	(usersRepository: UsersRepository) =>
 	async ({ name, email, password, isAdmin, createdAt, updatedAt }: UsersDataDTO): Promise<UserEntity> => {
 		try {
-			// const foundUser = await usersRepository.getUserByLoginRepository(email);
+			const foundUser = await usersRepository.getUserByLoginRepository(email);
 			// // Verifica se o usuário já existe
-			// if (foundUser?.email) throw new AppError("User already exists", StatusCodes.BAD_REQUEST);
+			if (foundUser?.email) throw new AppError("User already exists", StatusCodes.BAD_REQUEST);
 
 			// BCRYPT HASHING
 			const saltRounds = Number.parseInt(process.env.SALT_ROUNDS || "10", 10);

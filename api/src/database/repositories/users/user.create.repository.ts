@@ -16,15 +16,15 @@ export const create =
 		const values = [idUser, name, email, password, isAdmin, createdAt, updatedAt];
 
 		const result: QueryResult = await pool.query(query, values);
-		const insertedRow = result.rows[0];
+		const sql_row = result.rows[0];
 
 		return new UserEntity({
-			idUser: insertedRow.id_user,
-			name: insertedRow.name,
-			email: insertedRow.email,
-			password: insertedRow.password,
-			isAdmin: insertedRow.is_admin,
-			createdAt: insertedRow.createdAt,
-			updatedAt: insertedRow.updatedAt,
+			idUser: sql_row.id_user,
+			name: sql_row.name,
+			email: sql_row.email,
+			password: sql_row.password,
+			isAdmin: sql_row.is_admin,
+			createdAt: sql_row.createdAt,
+			updatedAt: sql_row.updatedAt,
 		});
 	};

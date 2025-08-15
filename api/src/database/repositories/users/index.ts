@@ -1,10 +1,10 @@
 import type { Pool } from "pg";
 import { create } from "./user.create.repository";
-// import { getUserByLogin } from "./users.login.repository";
+import { getUserByLogin } from "./user.login.repository";
 
 export const createUsersRepository = (pool: Pool) => {
 	return {
-		// getUserByLoginRepository: getUserByLogin(pool),
+		getUserByLoginRepository: getUserByLogin(),
 		createUserRepository: create(pool),
 	};
 };
