@@ -1,11 +1,8 @@
-// src/App.jsx
+import HomePage from './pages/HomePage/HomePage.jsx';
 
 function App() {
   return (
-    <div>
-      <h1>Iniciando Aplicação ScoScan</h1>
-      <p>Versão inicial.</p>
-    </div>
+    <HomePage />
   )
 }
 
