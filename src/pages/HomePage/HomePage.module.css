@@ -1,0 +1,9 @@
+.mainContent .heroSection{
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.heroImage img {
+    width: 400px;
+}

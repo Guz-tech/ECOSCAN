@@ -1,12 +1,14 @@
 
 import styles from './Header.module.css'; 
+import logoImage from '@/assets/images/Logo.png';
+
 function Header() {
   return (
  
     <header className={styles.headerContainer}>
       
       <a href="/" className={styles.logo}>
-        <h1>EcoScan</h1> 
+      <img src={logoImage} alt="Logo do site" />
       </a>
 
       <nav>
