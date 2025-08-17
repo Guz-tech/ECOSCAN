@@ -1,24 +1,35 @@
-
-import styles from './Header.module.css'; 
+import { useState } from 'react';
+import './Header.css';
 import logoImage from '@/assets/images/Logo.png';
 
 function Header() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   return (
- 
-    <header className={styles.headerContainer}>
-      
-      <a href="/" className={styles.logo}>
-      <img src={logoImage} alt="Logo do site" />
-      </a>
+    <header className="header">
+      <div className="container headerContent">
+        <a href="/" className="logo">
+          <img src={logoImage} alt="Logo do site" />
+        </a>
 
-      <nav>
-        <ul className={styles.navList}>
-          <li><a href="/sobre">Sobre</a></li>
-          <li><a href="/Qcomo-funciona">Como Funciona</a></li>
-          <li><a href="/contato">Contato</a></li>
-        </ul>
-      </nav>
+        <button className={`hamburger ${isMenuOpen ? 'open' : ''}`} onClick={toggleMenu} aria-label="Abrir menu" aria-expanded={isMenuOpen}>
+          <div className="line" />
+          <div className="line" />
+          <div className="line" />
+        </button>
 
+        <nav className={`nav ${isMenuOpen ? 'open' : ''}`}>
+          <ul className="navList">
+            <li><a href="/sobre" onClick={toggleMenu}>Sobre</a></li>
+            <li><a href="/como-funciona" onClick={toggleMenu}>Como Funciona</a></li>
+            <li><a href="/contato" onClick={toggleMenu}>Contato</a></li>
+          </ul>
+        </nav>
+      </div>
     </header>
   );
 }
