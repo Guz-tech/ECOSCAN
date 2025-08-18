@@ -1,13 +1,20 @@
 import "./HomePage.css";
 import heroImage from "@/assets/images/img.png";
-import Header from "@/components/Header/Header.jsx";
+
 import ButtonPrimary from "@/components/Button/ButtonPrimary.jsx";
 import ButtonSecondary from "@/components/Button/ButtonSecondary.jsx";
+import { useNavigate } from 'react-router-dom';
 
 function HomePage() {
+  const navigate = useNavigate();
+
+  const handleAdicionarClick = () => {
+    
+    console.log("Redirecionando para a página de adicionar resíduo...");
+    navigate('/adicionar-residuo');
+  };
   return (
     <>
-      <Header />
 
       <main>
         <section className="heroSection">
@@ -17,7 +24,7 @@ function HomePage() {
               <p>Sua atitude inteligente para um futuro mais sustentável.</p>
               <div className="heroButtons">
                 <ButtonSecondary>Conheça o Dashboard</ButtonSecondary>
-                <ButtonPrimary>Adicionar Resíduo</ButtonPrimary>
+                <ButtonPrimary onClick={handleAdicionarClick}>Adicionar Resíduo</ButtonPrimary>
               </div>
             </div>
 

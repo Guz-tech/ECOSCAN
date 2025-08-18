@@ -2,7 +2,7 @@
 .heroSection {
   display: flex;
   align-items: center;
-  min-height: calc(100vh - 80px); 
+  min-height: calc(86vh - 80px); 
   padding-block: 2rem; 
   color: white;
 }
