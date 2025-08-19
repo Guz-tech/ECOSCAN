@@ -19,15 +19,12 @@ export const loginUser = (usersService: UsersService) =>
 
       res.cookie("token", loginResult, {
         httpOnly: true,
-        secure: false,
+        secure: true,
         sameSite: "lax",
         maxAge: 1000 * 60 * 60 * 24, // 1 dia
       });
 
-      const token = loginResult;
-
       return res.status(StatusCodes.OK).json({
-        info: token as LoginResponse,
         message: "Logado com sucesso!",
       });
     } catch (error) {
