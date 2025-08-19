@@ -26,7 +26,7 @@ function Header() {
           <ul className="navList">
             <li><a href="/sobre" onClick={toggleMenu}>Sobre</a></li>
             <li><a href="/cadastro" onClick={toggleMenu}>Cadastre-se</a></li>
-            <li><a href="/contato" onClick={toggleMenu}>Login</a></li>
+            <li><a href="/login" onClick={toggleMenu}>Login</a></li>
           </ul>
         </nav>
       </div>
