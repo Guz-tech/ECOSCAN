@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import './Header.css';
 import logoImage from '@/assets/images/Logo.png';
+import { Link } from 'react-router-dom';
 
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -23,12 +24,12 @@ function Header() {
         </button>
 
         <nav className={`nav ${isMenuOpen ? 'open' : ''}`}>
-          <ul className="navList">
-            <li><a href="/sobre" onClick={toggleMenu}>Sobre</a></li>
-            <li><a href="/cadastro" onClick={toggleMenu}>Cadastre-se</a></li>
-            <li><a href="/contato" onClick={toggleMenu}>Login</a></li>
-          </ul>
-        </nav>
+  <ul className="navList">
+    <li><Link to="/sobre" onClick={toggleMenu}>Sobre</Link></li>
+    <li><Link to="/register" onClick={toggleMenu}>Cadastre-se</Link></li> 
+    <li><Link to="/login" onClick={toggleMenu}>Login</Link></li> 
+  </ul>
+</nav>
       </div>
     </header>
   );

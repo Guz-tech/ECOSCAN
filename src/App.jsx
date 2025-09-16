@@ -3,6 +3,9 @@ import Header from "@/components/Header/Header.jsx";
 import Footer from "@/components/Footer/Footer.jsx";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ResiduePage from "./pages/Residue/ResiduePage.jsx";
+import SobrePage from './pages/SobrePage/SobrePage.jsx';
+import LoginPage from './pages/LoginPage/LoginPage';
+import RegisterPage from './pages/RegisterPage/RegisterPage';
 
 function App() {
   return (
@@ -14,6 +17,9 @@ function App() {
           <Route path="/" element={<HomePage />} />
 
           <Route path="/adicionar-residuo" element={<ResiduePage />} />
+          <Route path="/sobre" element={<SobrePage />} /> 
+           <Route path="/login" element={<LoginPage />} />
+            <Route path="/register" element={<RegisterPage />} />
         </Routes>
       </main>
 
