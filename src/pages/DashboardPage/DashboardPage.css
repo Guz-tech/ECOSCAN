@@ -1,0 +1,81 @@
+.categories-page {
+  min-height: calc(100vh - 120px);
+  padding: 60px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.page-title {
+  font-size: 2.5rem;
+  color: #ffffff;
+  margin-bottom: 50px;
+  font-weight: bold;
+  text-align: center;
+  width: 100%;
+}
+
+/* O container para os cards */
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 40px;
+  max-width: 1000px;
+  width: 100%;
+  justify-items: center;
+  align-items: center;
+}
+
+/* O estilo de cada card de categoria */
+.category-card {
+  background-color: #3b5249;
+  width: 200px;
+  height: 220px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+.category-card:hover {
+  transform: translateY(-12px);
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* Estilo do ícone dentro do card */
+.card-icon {
+  font-size: 65px;
+  margin-bottom: 20px;
+}
+
+/* Estilo do texto dentro do card */
+.card-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+/* Media Query para telas menores */
+@media (max-width: 600px) {
+  .categories-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .category-card {
+    width: 80%;
+    max-width: 250px;
+    height: 200px;
+  }
+
+  .page-title {
+    font-size: 2rem;
+    margin-bottom: 40px;
+  }
+}

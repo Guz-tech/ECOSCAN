@@ -3,19 +3,22 @@ import heroImage from "@/assets/images/img.png";
 
 import ButtonPrimary from "@/components/Button/ButtonPrimary.jsx";
 import ButtonSecondary from "@/components/Button/ButtonSecondary.jsx";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 function HomePage() {
   const navigate = useNavigate();
 
   const handleAdicionarClick = () => {
-    
     console.log("Redirecionando para a página de adicionar resíduo...");
-    navigate('/adicionar-residuo');
+    navigate("/adicionar-residuo");
   };
+
+  const handleDashboardClick = () => {
+    navigate("/dashboard");
+  };
+
   return (
     <>
-
       <main>
         <section className="heroSection">
           <div className="container heroContent">
@@ -23,8 +26,13 @@ function HomePage() {
               <h1>ECOSCAN</h1>
               <p>Sua atitude inteligente para um futuro mais sustentável.</p>
               <div className="heroButtons">
-                <ButtonSecondary>Conheça o Dashboard</ButtonSecondary>
-                <ButtonPrimary onClick={handleAdicionarClick}>Adicionar Resíduo</ButtonPrimary>
+                {/* 2. Adicione o onClick no botão */}
+                <ButtonSecondary onClick={handleDashboardClick}>
+                  Conheça o Dashboard
+                </ButtonSecondary>
+                <ButtonPrimary onClick={handleAdicionarClick}>
+                  Adicionar Resíduo
+                </ButtonPrimary>
               </div>
             </div>
 
