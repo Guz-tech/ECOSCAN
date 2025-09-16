@@ -1,5 +1,105 @@
-footer {
-    background-color: antiquewhite;
-     padding: 40px 20px; 
+.footer {
+    background-color: #EBF5EE;
+    color: #2F4F4F;
+    padding: 30px 0 0 0; /* AJUSTADO */
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    line-height: 1.7;
+    font-weight: 500;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+}
+
+.footer-section {
+    min-width: 280px;
+    margin-bottom: 30px;
+    padding: 0 15px;
+}
+
+.footer-logo {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: #1A2E1A;
+}
+
+.about p {
+    color: #3B5249;
+}
+
+.links h3, .social h3 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #1A2E1A;
+}
+
+.links ul {
+    list-style: none;
+    padding: 0;
+}
+
+.links ul li {
+    margin-bottom: 10px;
+}
+
+.links a {
+    color: #2F4F4F;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.links a:hover {
+    color: #4C7C4C;
+}
+
+.social-icons a {
+    color: #2F4F4F;
+    font-size: 24px;
+    margin-right: 20px;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.social-icons a:hover {
+    color: #4C7C4C;
+    transform: translateY(-2px);
+}
+
+.footer-bottom {
     text-align: center;
+    padding: 15px; /* AJUSTADO */
+    margin-top: 20px; /* AJUSTADO */
+    background-color: #DCEAE3;
+    color: #3B5249;
+    font-size: 14px;
+}
+
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .footer-section {
+        width: 100%;
+        max-width: 400px;
+        margin-bottom: 30px; /* AJUSTADO */
+    }
+
+    .social-icons {
+        display: flex;
+        justify-content: center;
+        gap: 25px;
+    }
+
+    .social-icons a {
+        margin-right: 0;
+    }
 }
