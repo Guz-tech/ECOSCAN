@@ -1,32 +1,76 @@
 import "./HomePage.css";
-import heroImage from "@/assets/images/img.png";
+import heroImage1 from "@/assets/images/img.png";
+import heroImage2 from "@/assets/images/img2.png"; 
+import heroImage3 from "@/assets/images/img3.png"; 
 
 import ButtonPrimary from "@/components/Button/ButtonPrimary.jsx";
 import ButtonSecondary from "@/components/Button/ButtonSecondary.jsx";
 import { useNavigate } from "react-router-dom";
 
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination, A11y, Autoplay, EffectFade } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/effect-fade';
+
+const heroImages = [
+  { src: heroImage1, alt: "Planta brotando em musgo" },
+  { src: heroImage2, alt: "Floresta vista de cima" }, 
+  { src: heroImage3, alt: "Pessoa plantando uma muda" } 
+];
+
+const carouselData = [
+  {
+    title: "Separe o Lixo Seco do Orgânico",
+    text: "Facilita a triagem e aumenta o potencial de reciclagem dos materiais. Lembre-se: recicláveis devem estar limpos e secos!"
+  },
+  {
+    title: "Reduza o Uso de Plástico",
+    text: "Opte por sacolas reutilizáveis, canudos de metal ou vidro e evite produtos com excesso de embalagens plásticas."
+  },
+  {
+    title: "Composte o Lixo Orgânico",
+    text: "Restos de frutas, verduras e cascas de ovos podem virar um adubo rico em nutrientes para suas plantas e horta."
+  },
+  {
+    title: "Descarte Eletrônicos Corretamente",
+    text: "Pilhas, baterias e aparelhos eletrônicos contêm metais pesados e não devem ser descartados no lixo comum. Procure pontos de coleta especializados."
+  }
+];
+
 function HomePage() {
   const navigate = useNavigate();
 
-  const handleAdicionarClick = () => {
-    console.log("Redirecionando para a página de adicionar resíduo...");
-    navigate("/adicionar-residuo");
-  };
-
-  const handleDashboardClick = () => {
-    navigate("/dashboard");
-  };
+  const handleAdicionarClick = () => navigate("/adicionar-residuo");
+  const handleDashboardClick = () => navigate("/dashboard");
 
   return (
-    <>
-      <main>
-        <section className="heroSection">
-          <div className="container heroContent">
-            <div className="heroText">
+    <main>
+      <section className="heroSection">
+        <div className="hero-columns-container container">
+          <div className="heroLeft">
+            <Swiper
+              className="heroSwiper"
+              modules={[Navigation, Pagination, A11y, Autoplay, EffectFade]}
+              effect="fade"
+              autoplay={{ delay: 4000, disableOnInteraction: false }}
+              loop={true}
+              pagination={{ clickable: true }}
+              navigation
+            >
+              {heroImages.map((image, index) => (
+                <SwiperSlide key={index}>
+                  <img src={image.src} alt={image.alt} />
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </div>
+          <div className="heroRight">
+            <div className="heroTextContent">
               <h1>ECOSCAN</h1>
               <p>Sua atitude inteligente para um futuro mais sustentável.</p>
               <div className="heroButtons">
-                {/* 2. Adicione o onClick no botão */}
                 <ButtonSecondary onClick={handleDashboardClick}>
                   Conheça o Dashboard
                 </ButtonSecondary>
@@ -35,14 +79,34 @@ function HomePage() {
                 </ButtonPrimary>
               </div>
             </div>
-
-            <div className="heroImage">
-              <img src={heroImage} alt="Pessoas reciclando lixo" />
-            </div>
           </div>
-        </section>
-      </main>
-    </>
+        </div>
+      </section>
+
+      <section className="carouselSection">
+        <div className="container">
+          <h2 className="carouselTitle">Dicas para um Planeta Mais Saudável</h2>
+          <Swiper
+            modules={[Navigation, Pagination, A11y]}
+            spaceBetween={30}
+            slidesPerView={1}
+            navigation
+            pagination={{ clickable: true }}
+            breakpoints={{
+              768: { slidesPerView: 2 },
+              1024: { slidesPerView: 3 },
+            }}
+          >
+            {carouselData.map((item, index) => (
+              <SwiperSlide key={index} className="tip-card">
+                <h3>{item.title}</h3>
+                <p>{item.text}</p>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
+      </section>
+    </main>
   );
 }
 

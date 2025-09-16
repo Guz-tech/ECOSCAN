@@ -13,7 +13,7 @@ function Footer() {
                 <div className="footer-section about">
                     <h2 className="footer-logo">EcoScan</h2>
                     <p>
-                        Sua atitude inteligente para um futuro mais sustentável.
+                        Sua atitude inteligente <br /> para um futuro mais sustentável.
                     </p>
                 </div>
 

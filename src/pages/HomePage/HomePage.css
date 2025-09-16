@@ -1,55 +1,180 @@
-.heroSection {
-  display: flex;
-  align-items: center;
-  min-height: calc(86vh - 80px);
-  padding-block: 2rem;
-  color: white;
-}
-
-.heroContent {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 2rem;
+.container {
   width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  box-sizing: border-box;
 }
 
-.heroText {
+.heroSection {
+  padding: 60px 0;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.hero-columns-container {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.heroLeft {
   flex: 1;
-  padding-right: 2rem;
+  min-width: 0;
+  height: 450px;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
-.heroText h1 {
-  font-size: 3.5rem;
+.heroSwiper {
+  width: 100%;
+  height: 100%;
+}
+
+.heroSwiper .swiper-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.heroRight {
+  flex: 1;
+  min-width: 0;
+  color: white;
+  text-align: left;
+}
+
+.heroTextContent h1 {
+  font-size: 4rem;
   margin-bottom: 1rem;
+  line-height: 1.1;
 }
 
-.heroText p {
-  font-size: 1.25rem;
+.heroTextContent p {
+  font-size: 1.3rem;
   margin-bottom: 2rem;
   line-height: 1.6;
+  color: #bdc3c7;
 }
 
 .heroButtons {
   display: flex;
-  gap: 1rem;
+  gap: 15px;
   flex-wrap: wrap;
+  justify-content: flex-start;
 }
 
-.heroImage img {
-  max-width: 100%;
-  height: auto;
-  width: 450px;
+.carouselSection {
+  padding: 60px 0;
 }
 
-/* Responsividade */
-@media (max-width: 768px) {
-  .heroContent {
-    flex-direction: column-reverse;
+.carouselTitle {
+  text-align: center;
+  font-size: 2.2rem;
+  color: #ffffff;
+  margin-bottom: 40px;
+}
+
+.tip-card {
+  background-color: #ffffff;
+  border-radius: 15px;
+  padding: 25px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+.tip-card h3 {
+  font-size: 1.3rem;
+  color: #283618;
+  margin-bottom: 15px;
+}
+
+.tip-card p {
+  font-size: 1rem;
+  color: #555;
+  line-height: 1.6;
+}
+
+.heroLeft .swiper-button-next,
+.heroLeft .swiper-button-prev {
+  color: rgba(255, 255, 255, 0.464);
+  --swiper-navigation-size: 28px;
+}
+
+.heroLeft .swiper-pagination-bullet-active {
+  background-color: white !important;
+}
+
+.carouselSection .swiper-button-next,
+.carouselSection .swiper-button-prev {
+  color: #061F16;
+    --swiper-navigation-size: 23px;
+}
+
+.carouselSection .swiper-pagination-bullet-active {
+  background-color: #2f4f4f !important;
+}
+
+@media (max-width: 992px) {
+  .hero-columns-container {
+    flex-direction: column;
     text-align: center;
+    gap: 30px;
+    height: 45rem;
+  }
+
+  .heroRight {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 20px; /
   }
 
   .heroButtons {
     justify-content: center;
+  }
+
+  .heroLeft {
+    width: 100%;
+   
+    height: 350px; 
+    margin-top: 20px; 
+  }
+
+  .heroTextContent h1 {
+    font-size: 3rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .heroSection {
+    padding: 30px 0; /
+  }
+
+  .hero-columns-container {
+    height: 40rem;
+  }
+  .heroLeft {
+    height: 200px;
+    border-radius: 10px;
+  }
+
+  .heroTextContent h1 {
+    font-size: 2.5rem;
+  }
+
+  .heroTextContent p {
+    font-size: 1.1rem;
+  }
+
+  .heroButtons {
+    flex-direction: column;
+    align-items: center;
   }
 }

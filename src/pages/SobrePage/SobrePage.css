@@ -1,6 +1,85 @@
-.sobre-container {
-  padding: 2rem 4rem;
-  text-align: center;
-  max-width: 800px;
-  margin: 40px auto;
+/* Container principal da página */
+.sobre-page {
+    background-color: #f4f4f4; 
+    color: #333; 
+}
+
+/* Seção do topo (Hero) */
+.sobre-hero {
+  background-color:#061F16; 
+    color: #FFFFFF;
+    text-align: center;
+    padding: 80px 20px;
+}
+
+.sobre-hero h1 {
+    font-size: 3.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.hero-subtitle {
+    font-size: 1.3rem;
+    color: #bdc3c7;
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* Conteúdo principal com as seções */
+.sobre-content {
+    padding: 60px 20px;
+}
+
+.sobre-section {
+    max-width: 800px;
+    margin: 0 auto 40px auto; 
+    text-align: center;
+}
+
+.section-icon {
+    font-size: 3rem;
+    color: #2F4F4F; 
+    margin-bottom: 20px;
+}
+
+.sobre-section h2 {
+    font-size: 2.2rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #1A2E1A;
+}
+
+.sobre-section p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #555;
+}
+
+/* Linha divisória entre as seções */
+.section-divider {
+    border: 0;
+    height: 1px;
+    background-color: #e0e0e0;
+    max-width: 400px;
+    margin: 60px auto; 
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .sobre-hero {
+        padding: 60px 20px;
+    }
+
+    .sobre-hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1.1rem;
+    }
+
+    .sobre-section h2 {
+        font-size: 1.8rem;
+    }
 }
