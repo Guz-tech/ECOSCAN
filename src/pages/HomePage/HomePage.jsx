@@ -34,8 +34,12 @@ const carouselData = [
     text: "Restos de frutas, verduras e cascas de ovos podem virar um adubo rico em nutrientes para suas plantas e horta."
   },
   {
-    title: "Descarte Eletrônicos Corretamente",
-    text: "Pilhas, baterias e aparelhos eletrônicos contêm metais pesados e não devem ser descartados no lixo comum. Procure pontos de coleta especializados."
+    title: "Composte o Lixo Orgânico",
+    text: "Restos de frutas, verduras e cascas de ovos podem virar um adubo rico em nutrientes para suas plantas e horta."
+  },
+  {
+    title: "Composte o Lixo Orgânico",
+    text: "Restos de frutas, verduras e cascas de ovos podem virar um adubo rico em nutrientes para suas plantas e horta."
   }
 ];
 

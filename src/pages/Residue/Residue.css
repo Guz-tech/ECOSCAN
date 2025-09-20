@@ -1,48 +1,87 @@
-/* Container principal da página de upload */
-.upload-section {
+.residue-section {
   display: flex;
   align-items: center;
   justify-content: center;
   min-height: calc(100vh - 150px);
   padding: 40px 20px;
-  color: #ffffff;
+
+  color: #FFFFFF;
 }
 
-/* Bloco de conteúdo centralizado */
-.upload-content {
+.residue-content {
   text-align: center;
   max-width: 700px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 2rem;
 }
 
-.upload-text h1 {
+.residue-text h1 {
   font-size: 3.5rem;
   font-weight: bold;
   margin-bottom: 1rem;
 }
 
-.upload-text p {
+.residue-text p {
   font-size: 1.25rem;
   color: #bdc3c7;
   line-height: 1.6;
 }
 
-.upload-buttons {
+.residue-buttons {
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
   justify-content: center;
 }
-/* Responsividade para celulares */
+
+.residue-preview-container, .residue-result-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.residue-image-preview {
+  max-width: 90%;
+  max-height: 400px;
+  border-radius: 10px;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 1rem;
+}
+
+.residue-result-card {
+  background-color: rgba(255, 255, 255, 0.05);
+  padding: 2rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: center;
+  min-width: 300px;
+}
+
+.residue-result-card p {
+  font-size: 1.2rem;
+  margin: 0.5rem 0;
+}
+
+.residue-result-card strong {
+  color: #90ee90;
+}
+
+.residue-error {
+  color: #ff6b6b;
+  margin-top: 1rem;
+  font-weight: bold;
+}
+
 @media (max-width: 768px) {
-  .upload-text h1 {
+  .residue-text h1 {
     font-size: 2.5rem;
   }
-
-  .upload-text p {
+  .residue-text p {
     font-size: 1.1rem;
   }
 }

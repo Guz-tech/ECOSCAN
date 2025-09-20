@@ -87,6 +87,7 @@
   flex-direction: column;
   justify-content: center;
   text-align: center;
+  height: 100%;
 }
 
 .tip-card h3 {

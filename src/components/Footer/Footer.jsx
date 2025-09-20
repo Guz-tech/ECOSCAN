@@ -1,6 +1,6 @@
 
 import './Footer.css';
-import { Link } from 'react-router-dom'; // <-- ESSA LINHA É A CHAVE
+import { Link } from 'react-router-dom';
 import { FaInstagram, FaFacebookF, FaTwitter } from 'react-icons/fa';
 
 function Footer() {
