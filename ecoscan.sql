@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS enterprise (
 );
 
 CREATE TABLE IF NOT EXISTS scanner_location (
-    scan_id SERIAL PRIMARY KEY,
+    id_scan UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     scan_datetime TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     latitude DECIMAL(10, 8),
     longitude DECIMAL(11, 8),
@@ -36,8 +36,8 @@ CREATE TABLE IF NOT EXISTS scanner_location (
     photo_url VARCHAR(255),
     scan_status VARCHAR(50) DEFAULT 'pending',
     notes TEXT,
-    user_id INT NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES Users(user_id)
+    id_user UUID NOT NULL,
+    FOREIGN KEY (id_user) REFERENCES Users(id_user)
         ON DELETE CASCADE
         ON UPDATE CASCADE
 );
