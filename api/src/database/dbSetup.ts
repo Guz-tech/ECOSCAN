@@ -12,6 +12,20 @@ export async function setupDatabase() {
         created_at TIMESTAMP DEFAULT NOW(),
         updated_at TIMESTAMP DEFAULT NOW()
       );
+      CREATE TABLE IF NOT EXISTS enterprise (
+          id_enterprise UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+          name_enterprise VARCHAR(255) NOT NULL,
+          company_name VARCHAR(255),
+          cnpj VARCHAR(20) UNIQUE NOT NULL,
+          address VARCHAR(255) NOT NULL,
+          contact_name VARCHAR(255),
+          contact_email VARCHAR(255),
+          contact_phone VARCHAR(20),
+          waste_type VARCHAR(50) NOT NULL,
+          schedule_frequency VARCHAR(50),
+          created_at TIMESTAMP DEFAULT NOW(),
+          updated_at TIMESTAMP DEFAULT NOW()
+      );
     `);
 
     console.log("Tabelas criadas com sucesso!");
