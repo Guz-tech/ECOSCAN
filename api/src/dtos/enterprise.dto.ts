@@ -30,3 +30,20 @@ export const enterpriseLoginSchema = z.object({
 });
 
 export type EnterpriseLoginDTO = z.infer<typeof enterpriseLoginSchema>;
+
+// DTO para atualizar uma Enterprise
+export const updateEnterpriseSchema = z.object({
+  idEnterprise: z.string().uuid("ID da empresa inválido"),
+  nameEnterprise: z.string().optional(),
+  companyName: z.string().optional(),
+  cnpj: z.string().optional(),
+  address: z.string().optional(),
+  contactName: z.string().optional(),
+  contactEmail: z.string().email("Email inválido").optional(),
+  contactPhone: z.string().optional(),
+  wasteType: z.string().optional(),
+  scheduleFrequency: z.string().optional(),
+  updatedAt: z.date().default(() => new Date()),
+});
+
+export type UpdateEnterpriseDTO = z.infer<typeof updateEnterpriseSchema>;
