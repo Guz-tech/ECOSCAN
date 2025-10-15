@@ -4,8 +4,25 @@ import ButtonPrimary from "@/components/Button/ButtonPrimary.jsx";
 import ButtonSecondary from "@/components/Button/ButtonSecondary.jsx";
 import "./Residue.css";
 
+
+import imageCompression from 'browser-image-compression';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faRecycle } from '@fortawesome/free-solid-svg-icons';
+
+// O resto do seu código inicial permanece igual
+const mapeamentoDetalhes = {
+  'plastic': { color: 'Vermelho', mensagem: 'Lave as embalagens plásticas para remover restos de alimentos. Tampas podem ser recicladas junto com as garrafas. Plásticos como PET levam mais de 400 anos para se decompor!' },
+  'paper': { color: 'Azul', mensagem: 'Papéis e papelões devem estar secos e limpos. Evite amassar, apenas dobre. Caixas de pizza engorduradas e guardanapos sujos não são recicláveis.' },
+  'cardboard': { color: 'Azul', mensagem: 'Desmonte as caixas de papelão para economizar espaço. Certifique-se de que não estejam molhadas ou engorduradas, pois isso contamina o processo de reciclagem.' },
+  'glass': { color: 'Verde', mensagem: 'O vidro é 100% reciclável! Lave os potes e garrafas. Se estiver quebrado, enrole em jornal para proteger os coletores e descarte no lixo comum com um aviso.' },
+  'metal': { color: 'Amarelo', mensagem: 'Latas de alumínio e aço são altamente recicláveis. Lave as latas de alimentos para evitar mau cheiro e contaminação. Amasse-as para otimizar o espaço.' },
+  'organic': { color: 'Marrom', mensagem: 'Resíduos orgânicos, como restos de frutas e vegetais, podem virar adubo através da compostagem, reduzindo o lixo em aterros e gerando um rico fertilizante para plantas.' }
+};
+const infoPadrao = { color: 'Cinza', mensagem: 'Este resíduo é considerado rejeito e não deve ser descartado na coleta seletiva. Deposite-o no lixo comum. Isso inclui lixo de banheiro, fraldas e absorventes.' };
+const coresCss = { 'Vermelho': '#e74c3c', 'Azul': '#3498db', 'Verde': '#2ecc71', 'Amarelo': '#f1c40f', 'Marrom': '#964B00', 'Cinza': '#95a5a6' };
+
 function ResiduePage() {
-  console.log("Variáveis de Ambiente Carregadas:", import.meta.env);
   const [file, setFile] = useState(null);
   const [result, setResult] = useState(null);
   const [previewUrl, setPreviewUrl] = useState(null);
@@ -21,13 +38,35 @@ function ResiduePage() {
     };
   }, [previewUrl]);
 
-  const handleFileChange = (e) => {
+ 
+  const handleFileChange = async (e) => {
     const selectedFile = e.target.files[0];
-    if (selectedFile) {
-      setFile(selectedFile);
-      setPreviewUrl(URL.createObjectURL(selectedFile));
-      setResult(null);
-      setError(null);
+    if (!selectedFile) {
+      return;
+    }
+
+    setResult(null);
+    setError(null);
+    setLoading(true); 
+
+    const options = {
+      maxSizeMB: 1,
+      maxWidthOrHeight: 1920,
+      useWebWorker: true,
+    };
+
+    try {
+      console.log(`Tamanho original: ${(selectedFile.size / 1024 / 1024).toFixed(2)} MB`);
+      const compressedFile = await imageCompression(selectedFile, options);
+      console.log(`Tamanho comprimido: ${(compressedFile.size / 1024 / 1024).toFixed(2)} MB`);
+
+      setFile(compressedFile); // Salva o arquivo JÁ COMPRIMIDO
+      setPreviewUrl(URL.createObjectURL(compressedFile));
+    } catch (err) {
+      console.error("Erro ao comprimir imagem:", err);
+      setError("Não foi possível processar esta imagem. Tente outra.");
+    } finally {
+      setLoading(false); // Esconde o feedback
     }
   };
 
@@ -47,7 +86,13 @@ function ResiduePage() {
       );
       const prediction = response.data.predictions[0];
       if (prediction) {
-        setResult({ class: prediction.class, confidence: (prediction.confidence * 100).toFixed(2) });
+        const classeDetectada = prediction.class.toLowerCase();
+        const infoResiduo = mapeamentoDetalhes[classeDetectada] || infoPadrao;
+        setResult({
+          class: prediction.class,
+          confidence: (prediction.confidence * 100).toFixed(2),
+          ...infoResiduo
+        });
       } else {
         setError('Nenhum objeto foi detectado na imagem. Tente outra foto.');
       }
@@ -58,7 +103,7 @@ function ResiduePage() {
       setLoading(false);
     }
   };
-
+  
   const handleReset = () => {
     setFile(null);
     setResult(null);
@@ -75,6 +120,7 @@ function ResiduePage() {
     <main>
       <section className="residue-section">
         <div className="container residue-content">
+          {}
           {!previewUrl && !result && (
             <>
               <div className="residue-text">
@@ -88,6 +134,7 @@ function ResiduePage() {
               </div>
             </>
           )}
+
           {previewUrl && !result && (
             <div className="residue-preview-container">
               <h1>Imagem Selecionada</h1>
@@ -100,16 +147,30 @@ function ResiduePage() {
               </div>
             </div>
           )}
+
           {result && (
             <div className="residue-result-container">
               <h1>Resultado da Análise</h1>
               <div className="residue-result-card">
                 <p><strong>Material Detectado:</strong> {result.class}</p>
                 <p><strong>Confiança:</strong> {result.confidence}%</p>
+                <div className="result-color-info">
+                  <strong>Cor da Lixeira:</strong> {result.color}
+                  <FontAwesomeIcon 
+                    icon={faRecycle} 
+                    className="icon-color"
+                    style={{ color: coresCss[result.color] }}
+                  />
+                </div>
+                <div className="residue-educational-message">
+                  <h4>Dica de Descarte</h4>
+                  <p>{result.mensagem}</p>
+                </div>
               </div>
               <ButtonPrimary onClick={handleReset}>Analisar Outra Imagem</ButtonPrimary>
             </div>
           )}
+
           {error && <p className="residue-error">{error}</p>}
         </div>
       </section>
