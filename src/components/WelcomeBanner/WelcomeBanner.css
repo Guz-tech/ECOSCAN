@@ -1,0 +1,41 @@
+.welcome-banner {
+  background-color: #90ee90;
+  color: #1a3a1a;
+  text-align: center;
+  padding: 0.5rem 1rem;
+  font-weight: 500;
+  width: 100%;
+  z-index: 999;
+  
+ 
+  animation: slideDown 0.5s ease-out forwards;
+  
+
+  transition: transform 0.5s ease-in, opacity 0.5s ease-in;
+
+  
+  transform: translateY(-100%);
+  opacity: 0;
+}
+
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+
+.welcome-banner.exiting {
+  transform: translateY(-100%);
+  opacity: 0;
+}
+
+.welcome-banner p {
+  margin: 0;
+}

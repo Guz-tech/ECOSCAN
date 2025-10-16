@@ -5,6 +5,7 @@ import heroImage3 from "@/assets/images/img3.png";
 
 import ButtonPrimary from "@/components/Button/ButtonPrimary.jsx";
 import ButtonSecondary from "@/components/Button/ButtonSecondary.jsx";
+import WelcomeBanner from "@/components/WelcomeBanner/WelcomeBanner.jsx";
 import { useNavigate } from "react-router-dom";
 
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -62,7 +63,8 @@ function HomePage() {
   const handleDashboardClick = () => navigate("/dashboard");
 
   return (
-    <main>
+    <>
+      <WelcomeBanner />
       <section className="heroSection">
         <div className="hero-columns-container container">
           <div className="heroLeft">
@@ -122,7 +124,7 @@ function HomePage() {
           </Swiper>
         </div>
       </section>
-    </main>
+    </>
   );
 }
 

@@ -1,11 +1,11 @@
 .header {
   width: 100%;
   padding-block: 1rem;
-  background-color: #061F16; 
+  background-color: #061F16;
   min-height: 80px;
   display: flex;
   align-items: center;
-  position: relative; 
+  position: relative;
   z-index: 1000;
 }
 
@@ -19,7 +19,7 @@
 .logo img {
   width: 150px;
   height: auto;
-  display: block; 
+  display: block;
 }
 
 .hamburger {
@@ -32,7 +32,7 @@
   border: none;
   cursor: pointer;
   padding: 0;
-  z-index: 1001; 
+  z-index: 1001;
 }
 
 .hamburger .line {
@@ -64,21 +64,52 @@
   opacity: 0.8;
 }
 
-/* Media Query para responsividade */
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.3rem 0.8rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 50px;
+  cursor: default;
+}
+
+.user-icon {
+  font-size: 1.6rem;
+  color: #90ee90;
+}
+
+.user-name {
+  font-weight: 500;
+  color: #ffffff;
+}
+
+.logout-button {
+  background: none;
+  border: none;
+  color: #e74c3c;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity 0.2s ease-in-out;
+  padding: 0.5rem;
+}
+
+.logout-button:hover {
+  opacity: 0.8;
+}
+
 @media (max-width: 768px) {
   .nav {
     display: flex;
     position: fixed;
-    top: 80px; /* Altura do header */
+    top: 80px;
     right: 0;
     height: calc(100vh - 80px);
     width: 100%;
     background-color: #061F16;
-
-    /* Começa fora da tela */
     transform: translateX(100%);
     transition: transform 0.3s ease-in-out;
-
     padding-top: 4rem;
     box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
   }
@@ -99,12 +130,17 @@
     text-align: center;
     padding: 1rem;
   }
-
-  .hamburger {
-    display: flex; /* Exibe o botão em telas menores */
+  
+  .logout-button {
+    font-size: 1.2rem;
+    padding: 1rem;
+    color: #ff6b6b;
   }
 
-  /* animation */
+  .hamburger {
+    display: flex;
+  }
+
   .hamburger.open .line:nth-child(1) {
     transform: rotate(45deg);
   }

@@ -7,13 +7,14 @@ import SobrePage from "./pages/SobrePage/SobrePage.jsx";
 import LoginPage from "./pages/LoginPage/LoginPage.jsx";
 import RegisterPage from "./pages/RegisterPage/RegisterPage.jsx";
 import DashboardPage from "./pages/DashboardPage/DashboardPage.jsx";
-// CORREÇÃO ESTÁ AQUI: O nome do arquivo foi ajustado para Live.jsx
 import LivePage from "./pages/LivePage/Live.jsx"; 
+
 
 function App() {
   return (
     <BrowserRouter>
       <Header />
+     
 
       <main>
         <Routes>
