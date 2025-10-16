@@ -26,8 +26,14 @@ export function AuthProvider({ children }) {
     setUser(userData);
   };
 
-  const logout = () => {
-    setUser(null);
+  const logout = async () => {
+    try {
+      await axios.post(`${apiUrl}/logout`, {}, { withCredentials: true });
+    } catch (error) {
+      console.error("Erro ao fazer logout:", error);
+    } finally {
+      setUser(null);
+    }
   };
 
   if (loading) {

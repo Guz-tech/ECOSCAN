@@ -85,7 +85,6 @@
   max-width: 640px;
 }
 
-/* 1. Cor da caixa de status ajustada (adeus, azul!) */
 .status-info {
   background-color: rgba(46, 204, 113, 0.1);
   border: 1px solid rgba(46, 204, 113, 0.3);
