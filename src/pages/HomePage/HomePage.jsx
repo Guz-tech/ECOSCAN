@@ -34,12 +34,24 @@ const carouselData = [
     text: "Restos de frutas, verduras e cascas de ovos podem virar um adubo rico em nutrientes para suas plantas e horta."
   },
   {
-    title: "Composte o Lixo Orgânico",
-    text: "Restos de frutas, verduras e cascas de ovos podem virar um adubo rico em nutrientes para suas plantas e horta."
+    title: "Descarte Correto de Eletrônicos",
+    text: "Pilhas, baterias e eletrônicos contêm metais tóxicos. Nunca os jogue no lixo comum. Procure pontos de coleta específicos em sua cidade."
   },
   {
-    title: "Composte o Lixo Orgânico",
-    text: "Restos de frutas, verduras e cascas de ovos podem virar um adubo rico em nutrientes para suas plantas e horta."
+    title: "Não Jogue Óleo de Cozinha na Pia",
+    text: "Um litro de óleo pode contaminar milhares de litros de água. Guarde o óleo usado em uma garrafa PET e leve a um ponto de coleta para reciclagem."
+  },
+  {
+    title: "O Que Fazer com Medicamentos Vencidos",
+    text: "Não descarte remédios no lixo ou no vaso sanitário. Eles contaminam o solo e a água. Leve-os a farmácias que possuem programas de coleta."
+  },
+  {
+    title: "Reutilize Embalagens e Potes",
+    text: "Potes de vidro e embalagens plásticas resistentes podem ter uma nova vida! Use-os para guardar alimentos, organizar objetos ou como vasos para plantas."
+  },
+  {
+    title: "Cuidado com Papéis Contaminados",
+    text: "Caixas de pizza engorduradas, guardanapos usados e papéis com restos de comida não podem ser reciclados. Descarte-os no lixo orgânico ou comum."
   }
 ];
 

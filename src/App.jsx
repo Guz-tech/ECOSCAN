@@ -4,9 +4,11 @@ import Footer from "@/components/Footer/Footer.jsx";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ResiduePage from "./pages/Residue/ResiduePage.jsx";
 import SobrePage from "./pages/SobrePage/SobrePage.jsx";
-import LoginPage from "./pages/LoginPage/LoginPage";
-import RegisterPage from "./pages/RegisterPage/RegisterPage";
-import DashboardPage from "./pages/DashboardPage/DashboardPage";
+import LoginPage from "./pages/LoginPage/LoginPage.jsx";
+import RegisterPage from "./pages/RegisterPage/RegisterPage.jsx";
+import DashboardPage from "./pages/DashboardPage/DashboardPage.jsx";
+// CORREÇÃO ESTÁ AQUI: O nome do arquivo foi ajustado para Live.jsx
+import LivePage from "./pages/LivePage/Live.jsx"; 
 
 function App() {
   return (
@@ -16,7 +18,7 @@ function App() {
       <main>
         <Routes>
           <Route path="/" element={<HomePage />} />
-
+          <Route path="/live" element={<LivePage />} />
           <Route path="/adicionar-residuo" element={<ResiduePage />} />
           <Route path="/sobre" element={<SobrePage />} />
           <Route path="/login" element={<LoginPage />} />

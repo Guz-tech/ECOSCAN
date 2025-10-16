@@ -77,18 +77,25 @@
   margin-bottom: 40px;
 }
 
+/* --- AQUI ESTÁ A CORREÇÃO --- */
+.carouselSection .swiper-slide {
+  /* Garante que os slides se estiquem para a altura do maior slide no wrapper */
+  height: auto; 
+}
+
 .tip-card {
   background-color: #ffffff;
   border-radius: 15px;
   padding: 25px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-  height: 250px;
+  /* height: 100% faz o card ocupar toda a altura do swiper-slide */
+  height: 100%; 
   display: flex;
   flex-direction: column;
   justify-content: center;
   text-align: center;
-  height: 100%;
 }
+/* --- FIM DA CORREÇÃO --- */
 
 .tip-card h3 {
   font-size: 1.3rem;
@@ -134,7 +141,7 @@
     text-align: center;
     display: flex;
     justify-content: center;
-    padding-bottom: 20px; /
+    padding-bottom: 20px;
   }
 
   .heroButtons {
@@ -143,7 +150,7 @@
 
   .heroLeft {
     width: 100%;
-   
+    
     height: 350px; 
     margin-top: 20px; 
   }
@@ -155,7 +162,7 @@
 
 @media (max-width: 576px) {
   .heroSection {
-    padding: 30px 0; /
+    padding: 30px 0; 
   }
 
   .hero-columns-container {
