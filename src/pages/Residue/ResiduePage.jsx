@@ -9,23 +9,85 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faRecycle } from '@fortawesome/free-solid-svg-icons';
 import { useAuth } from "../../context/AuthContex.jsx";
 import AuthRedirectModal from '../../components/AuthRedirectModal/AuthRedirectModal.jsx';
+import MaterialSelectionModal from '../../components/MaterialSelectionModal/MaterialSelectionModal.jsx';
+
+// --- Mapeamentos e constantes (ATUALIZADOS) ---
+
+const infoPadrao = { categories: ["Rejeito"], color: 'Cinza', mensagem: 'Este resíduo é considerado rejeito e não deve ser descartado na coleta seletiva. Deposite-o no lixo comum. Isso inclui lixo de banheiro, fraldas e absorventes.' };
+const metalInfo = { categories: ["Metal"], color: 'Amarelo', mensagem: 'Latas de alumínio e aço são altamente recicláveis. Lave as latas de alimentos para evitar mau cheiro e contaminação. Amasse-as para otimizar o espaço.' };
+const plasticoInfo = { categories: ["Plástico"], color: 'Vermelho', mensagem: 'Lave as embalagens plásticas para remover restos de alimentos. Tampas podem ser recicladas junto com as garrafas.' };
+const papelInfo = { categories: ["Papel"], color: 'Azul', mensagem: 'Papéis e papelões devem estar secos e limpos. Evite amassar, apenas dobre. Caixas de pizza engorduradas não são recicláveis.' };
+const vidroInfo = { categories: ["Vidro"], color: 'Verde', mensagem: 'O vidro é 100% reciclável! Lave os potes e garrafas. Se estiver quebrado, enrole em jornal para proteger os coletores.' };
+const organicoInfo = { categories: ["Orgânico"], color: 'Marrom', mensagem: 'Resíduos orgânicos, como restos de frutas e vegetais, podem virar adubo através da compostagem.' };
+const cartaoInfo = { categories: ["Papelão"], color: 'Azul', mensagem: 'Desmonte as caixas de papelão para economizar espaço. Certifique-se de que não estejam molhadas ou engorduradas.' };
 
 const mapeamentoDetalhes = {
-    'plastic': { categories: ["Plástico"], color: 'Vermelho', mensagem: 'Lave as embalagens plásticas para remover restos de alimentos. Tampas podem ser recicladas junto com as garrafas. Plásticos como PET levam mais de 400 anos para se decompor!' },
-    'paper': { categories: ["Papel"], color: 'Azul', mensagem: 'Papéis e papelões devem estar secos e limpos. Evite amassar, apenas dobre. Caixas de pizza engorduradas e guardanapos sujos não são recicláveis.' },
-    'cardboard': { categories: ["Papelão"], color: 'Azul', mensagem: 'Desmonte as caixas de papelão para economizar espaço. Certifique-se de que não estejam molhadas ou engorduradas, pois isso contamina o processo de reciclagem.' },
-    'glass': { categories: ["Vidro"], color: 'Verde', mensagem: 'O vidro é 100% reciclável! Lave os potes e garrafas. Se estiver quebrado, enrole em jornal para proteger os coletores e descarte no lixo comum com um aviso.' },
-    'metal': { categories: ["Metal"], color: 'Amarelo', mensagem: 'Latas de alumínio e aço são altamente recicláveis. Lave as latas de alimentos para evitar mau cheiro e contaminação. Amasse-as para otimizar o espaço.' },
-    'organic': { categories: ["Orgânico"], color: 'Marrom', mensagem: 'Resíduos orgânicos, como restos de frutas e vegetais, podem virar adubo através da compostagem, reduzindo o lixo em aterros e gerando um rico fertilizante para plantas.' },
-    'biodegradable': { categories: ["Orgânico"], color: 'Marrom', mensagem: 'Resíduos biodegradáveis, como restos de alimentos e plantas, podem se decompor naturalmente e virar adubo através da compostagem.' },
-    'stone': { categories: ["Rejeito"], color: 'Cinza', mensagem: 'Pedras e pequenas quantidades de entulho são considerados rejeitos. Para grandes volumes, como restos de obra, procure um Ecoponto ou um serviço de coleta especializado.' }
+    // Classes de Materiais
+    'plastic': plasticoInfo,
+    'paper': papelInfo,
+    'glass': vidroInfo,
+    'metal': metalInfo,
+    'organic': organicoInfo,
+    'biodegradable': organicoInfo,
+    'cardboard': cartaoInfo,
+
+    // Classes de Objetos
+    'bottle': { categories: ["Plástico", "Vidro", "Metal"], color: 'Vermelho', mensagem: 'Garrafas podem ser de Plástico, Vidro ou Metal. Verifique o material e descarte na lixeira correta.' },
+    'petbottle': plasticoInfo,
+    'can': metalInfo,
+
+    // Classes de Rejeitos e Números
+    'stone': { ...infoPadrao, categories: ["Rejeito"] },
+    '26': { ...infoPadrao, categories: ["Rejeito"] },
+    '0': { ...infoPadrao, categories: ["Rejeito"] }, // Classe "0" também estava na lista
+    '1': { ...infoPadrao, categories: ["Rejeito"] }, // Classe "1" também estava na lista
+    'mask': { ...infoPadrao, categories: ["Rejeito"] }, // Máscaras são rejeito
+    
+    // Classes em MAIÚSCULO (do modelo)
+    'PLASTIC': plasticoInfo,
+    'PAPER': papelInfo,
+    'GLASS': vidroInfo,
+    'METAL': metalInfo,
+    'BIODEGRADABLE': organicoInfo,
+    'CARDBOARD': cartaoInfo,
 };
-const traducaoClasses = { 'plastic': 'Plástico', 'paper': 'Papel', 'cardboard': 'Papelão', 'glass': 'Vidro', 'metal': 'Metal', 'organic': 'Orgânico', 'biodegradable': 'Biodegradável', 'stone': 'Pedra' };
-const infoPadrao = { color: 'Cinza', mensagem: 'Este resíduo é considerado rejeito e não deve ser descartado na coleta seletiva. Deposite-o no lixo comum. Isso inclui lixo de banheiro, fraldas e absorventes.' };
+
+const traducaoClasses = { 
+    // Materiais
+    'plastic': 'Plástico', 
+    'paper': 'Papel', 
+    'glass': 'Vidro', 
+    'metal': 'Metal', 
+    'organic': 'Orgânico', 
+    'biodegradable': 'Orgânico', 
+    'cardboard': 'Papelão', 
+
+    // Objetos
+    'bottle': 'Garrafa', 
+    'petbottle': 'Garrafa PET',
+    'can': 'Lata',
+
+    // Rejeitos e Números
+    'stone': 'Pedra',
+    '26': 'Rejeito (26)',
+    '0': 'Rejeito (0)',
+    '1': 'Rejeito (1)',
+    'mask': 'Máscara',
+
+    // Classes em MAIÚSCULO
+    'PLASTIC': 'Plástico',
+    'PAPER': 'Papel',
+    'GLASS': 'Vidro',
+    'METAL': 'Metal',
+    'BIODEGRADABLE': 'Orgânico',
+    'CARDBOARD': 'Papelão',
+};
+
 const coresCss = { 'Vermelho': '#e74c3c', 'Azul': '#3498db', 'Verde': '#2ecc71', 'Amarelo': '#f1c40f', 'Marrom': '#964B00', 'Cinza': '#95a5a6' };
+// Lista de materiais para o modal de seleção (incluindo Papelão)
+const ALL_MATERIALS = ['Plástico', 'Papel', 'Papelão', 'Vidro', 'Metal', 'Orgânico', 'Eletrônico', 'Rejeito'];
 
 
-// --- Nova função para converter o arquivo para Base64 ---
 const toBase64 = file => new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
@@ -44,8 +106,12 @@ function ResiduePage() {
     const [previewUrl, setPreviewUrl] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
     const fileInputRef = useRef(null);
+
+    const [isSaveModalOpen, setIsSaveModalOpen] = useState(false);
+    const [detectedConfidence, setDetectedConfidence] = useState(0);
+
 
     useEffect(() => {
         return () => { if (previewUrl) URL.revokeObjectURL(previewUrl); };
@@ -69,40 +135,41 @@ function ResiduePage() {
         }
     };
 
-    // --- Função handleUpload totalmente refeita ---
     const handleUpload = async () => {
         if (!file) return;
         setLoading(true);
         setError(null);
 
         try {
-            // 1. Converte a imagem para Base64
             const base64Image = await toBase64(file);
-
             const apiKey = import.meta.env.VITE_ROBOFLOW_API_KEY;
             if (!apiKey) throw new Error("Chave de API não configurada.");
             
-            // 2. Monta a URL da API
+            // Esta é a URL do seu projeto (que encontramos)
             const url = `https://detect.roboflow.com/waste-classification-uwqfy/1?api_key=${apiKey}`;
 
-            // 3. Envia a string Base64 no corpo da requisição
             const response = await axios.post(url, base64Image, {
-                headers: {
-                    "Content-Type": "application/x-www-form-urlencoded"
-                }
+                headers: { "Content-Type": "application/x-www-form-urlencoded" }
             });
 
             const prediction = response.data.predictions[0];
             if (prediction) {
-                const classeDetectada = prediction.class.toLowerCase();
-                const nomeTraduzido = traducaoClasses[classeDetectada] || prediction.class;
+                // A classe pode ser "can", "bottle", "PLASTIC" ou "26"
+                const classeDetectada = prediction.class; // Não precisa de toLowerCase(), pois "PLASTIC" é uma classe
+
+                // Agora "can", "bottle", "26", etc., serão encontrados
+                const nomeTraduzido = traducaoClasses[classeDetectada] || classeDetectada;
                 const infoResiduo = mapeamentoDetalhes[classeDetectada] || infoPadrao;
-                const primaryMaterial = infoResiduo.categories ? infoResiduo.categories[0] : nomeTraduzido;
-                const scanResult = { class: nomeTraduzido, confidence: (prediction.confidence * 100).toFixed(2), ...infoResiduo };
+                
+                const scanResult = { 
+                    class: nomeTraduzido, 
+                    confidence: (prediction.confidence * 100).toFixed(2), 
+                    ...infoResiduo 
+                };
+                
                 setResult(scanResult);
-                if (user && primaryMaterial) {
-                    await axios.post(`${apiUrl}/history`, { material_type: primaryMaterial, confidence: prediction.confidence }, { withCredentials: true });
-                }
+                setDetectedConfidence(prediction.confidence); 
+
             } else {
                 setError('Nenhum objeto foi detectado na imagem. Tente outra foto.');
             }
@@ -110,7 +177,6 @@ function ResiduePage() {
             if (err.response) {
                 setError(`Erro ${err.response.status}: ${err.response.data.message || 'O servidor da Roboflow retornou um erro.'}`);
             } else {
-
                 setError(`Erro ao analisar a imagem: ${err.message}`);
             }
         } finally {
@@ -124,11 +190,13 @@ function ResiduePage() {
         setPreviewUrl(null);
         setLoading(false);
         setError(null);
+        setIsSaveModalOpen(false); 
+        setDetectedConfidence(0); 
     };
 
     const handleChooseFileClick = () => {
         if (!user) {
-            setIsModalOpen(true);
+            setIsAuthModalOpen(true);
             return;
         }
         fileInputRef.current.click();
@@ -136,11 +204,31 @@ function ResiduePage() {
 
     const handleCameraClick = () => {
         if (!user) {
-            setIsModalOpen(true);
+            setIsAuthModalOpen(true);
             return;
         }
         navigate('/live');
     };
+
+    const handleOpenSaveModal = () => {
+        setIsSaveModalOpen(true);
+    };
+
+    const handleConfirmSave = async (selectedMaterial) => {
+        if (user && selectedMaterial && selectedMaterial !== "Rejeito") {
+            try {
+                await axios.post(`${apiUrl}/history`, { 
+                    material_type: selectedMaterial, 
+                    confidence: detectedConfidence 
+                }, { withCredentials: true });
+            } catch (historyError) {
+                console.error("Não foi possível guardar o scan no histórico:", historyError);
+            }
+        }
+        setIsSaveModalOpen(false);
+        handleReset();
+    };
+
 
     return (
         <>
@@ -172,13 +260,14 @@ function ResiduePage() {
                                 </div>
                             </div>
                         )}
+                        
                         {result && (
                             <div className="residue-result-container">
                                 <h1>Resultado da Análise</h1>
                                 <div className="residue-result-card">
                                     <p><strong>Material Detectado:</strong> {result.class}</p>
                                     <div className="result-color-info">
-                                        <strong>Cor da Lixeira:</strong>  {result.color}
+                                        <strong>Cor da Lixeira:</strong>&nbsp;{result.color} 
                                         <FontAwesomeIcon icon={faRecycle} className="icon-color" style={{ color: coresCss[result.color] }} />
                                     </div>
                                     <div className="residue-educational-message">
@@ -189,14 +278,32 @@ function ResiduePage() {
                                         A confiança dessa análise é de {result.confidence}%, nosso identificador pode cometer erros!
                                     </small>
                                 </div>
-                                <ButtonPrimary onClick={handleReset}>Analisar Outra Imagem</ButtonPrimary>
+
+                                <div className="confirmation-buttons">
+                                    <ButtonSecondary onClick={handleReset}>
+                                        Errado? Tente Novamente
+                                    </ButtonSecondary>
+                                    <ButtonPrimary onClick={handleOpenSaveModal} disabled={!user}>
+                                        Salvar no Dashboard
+                                    </ButtonPrimary>
+                                </div>
                             </div>
                         )}
                         {error && <p className="residue-error">{error}</p>}
                     </div>
                 </section>
             </main>
-            <AuthRedirectModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+            
+            <AuthRedirectModal isOpen={isAuthModalOpen} onClose={() => setIsAuthModalOpen(false)} />
+
+            <MaterialSelectionModal
+                isOpen={isSaveModalOpen}
+                onClose={() => setIsSaveModalOpen(false)}
+                onConfirm={handleConfirmSave}
+                detectedItemName={result?.class || ''}
+                // O modal de seleção agora terá as categorias corretas (ex: ["Plástico", "Vidro", "Metal"] para Garrafa)
+                categories={result?.categories ? result.categories : ALL_MATERIALS}
+            />
         </>
     );
 }

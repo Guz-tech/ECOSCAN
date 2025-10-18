@@ -53,35 +53,38 @@
   margin-bottom: 1rem;
 }
 
-.residue-result-card {
-  background-color: rgba(255, 255, 255, 0.05);
-  padding: 2rem;
-  border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  text-align: center;
-  min-width: 300px;
-}
-
-.residue-result-card p {
-  font-size: 1.2rem;
-  margin: 0.5rem 0;
-}
-
-.residue-result-card strong {
-  color: #90ee90;
-}
-
 .residue-error {
   color: #ff6b6b;
   margin-top: 1rem;
   font-weight: bold;
 }
 
+/* --- SEÇÃO DE CORREÇÃO DO LAYOUT --- */
+
+.residue-result-card {
+  background-color: rgba(255, 255, 255, 0.05);
+  padding: 2rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: left; /* MODIFICADO: Alinha tudo à esquerda por padrão */
+  min-width: 300px;
+  width: 100%; /* Faz o card ocupar o espaço */
+}
+
+.residue-result-card p {
+  font-size: 1.2rem;
+  margin: 0.5rem 0;
+  /* Removemos o text-align: center daqui */
+}
+
+.residue-result-card strong {
+  color: #90ee90;
+}
 
 .result-color-info {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start; /* MODIFICADO: Alinha à esquerda */
   font-size: 1.2rem;
   margin: 15px 0; 
 }
@@ -89,7 +92,6 @@
 .icon-color {
   font-size: 1.8rem; 
   margin-left: 12px;
- 
   filter: drop-shadow(0 0 8px currentColor); 
 }
 
@@ -97,14 +99,14 @@
   margin-top: 25px;
   padding-top: 15px;
   border-top: 1px solid rgba(255, 255, 255, 0.2);
-  text-align: left;
+  text-align: left; /* Garante alinhamento à esquerda */
 }
 
 .residue-educational-message h4 {
   color: #FFFFFF;
   font-weight: bold;
   margin-bottom: 8px;
-  text-align: center;
+  text-align: left; /* MODIFICADO: Alinha à esquerda */
 }
 
 .residue-educational-message p {
@@ -113,11 +115,37 @@
   line-height: 1.6;
 }
 
+.confidence-disclaimer {
+  display: block; /* Faz ocupar a linha toda */
+  width: 100%;
+  margin-top: 1.5rem;
+  font-size: 0.9rem;
+  color: #bdc3c7;
+  text-align: center; /* MODIFICADO: Centraliza APENAS este texto */
+}
+
+/* --- FIM DA SEÇÃO DE CORREÇÃO --- */
+
+
+.confirmation-buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  justify-content: center;
+  width: 100%;
+  max-width: 640px;
+  margin-top: 1.5rem; 
+}
+
 @media (max-width: 768px) {
   .residue-text h1 {
     font-size: 2.5rem;
   }
   .residue-text p {
     font-size: 1.1rem;
+  }
+  .confirmation-buttons {
+    flex-direction: column;
+    align-items: stretch;
   }
 }

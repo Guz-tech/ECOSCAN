@@ -293,7 +293,7 @@ function LivePage() {
                 <canvas ref={canvasRef} className="detection-canvas" />
               </div>
               
-              {isFrozen && detectedItem && (<div className="disclaimer-box">Confiança da IA: {(detectedItem.score * 100).toFixed(1)}%.</div>)}
+              {isFrozen && detectedItem && (<div className="disclaimer-box">A confiança da IA é de: {(detectedItem.score * 100).toFixed(1)}%. Lembre-se, a IA pode cometer erros. Ajude-nos a treinar com seu feedback!</div>)}
               <div className={`result-panel ${displayedResultInfo ? "status-alert" : "status-info"}`}><p>{status}</p></div>
               
               {!isFrozen ? (

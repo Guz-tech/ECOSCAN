@@ -14,13 +14,12 @@ const dashboardItems = [
   { title: "Orgânico", icon: <FaRecycle />, path: "/organico" },
 ];
 
-// Objeto atualizado com as dicas e cores das lixeiras
 const DASHBOARD_INFO = {
   'Plástico': { tip: 'Lave as embalagens para remover restos de alimentos e amasse-as para economizar espaço.', binColorName: 'Vermelho', binColorHex: '#e74c3c' },
   'Papel': { tip: 'Mantenha os papéis secos e limpos. Evite amassar, apenas dobre para facilitar a triagem.', binColorName: 'Azul', binColorHex: '#3498db' },
   'Papelão': { tip: 'Desmonte as caixas de papelão para otimizar o espaço na coleta seletiva.', binColorName: 'Azul', binColorHex: '#3498db' },
   'Vidro': { tip: 'Lave os potes e garrafas. Se estiverem quebrados, embale-os em jornal para proteger os coletores.', binColorName: 'Verde', binColorHex: '#2ecc71' },
-  'Metal': { tip: 'Latas de alumínio e aço são altamente recicláveis. Lave-as e amasse-as se possível.', binColorName: 'Amarelo', binColorHex: '#f1c40f' },
+  'Metal': { tip: 'Latas de alumínio e aço são altamente recicláveis. Lave-as e amasse-as se possível.', binColorName: 'Amarillo', binColorHex: '#f1c40f' },
   'Orgânico': { tip: 'Restos de alimentos podem virar um adubo rico em nutrientes para suas plantas através da compostagem.', binColorName: 'Marrom', binColorHex: '#964B00' },
   'Eletrônico': { tip: 'Nunca descarte no lixo comum! Procure pontos de coleta específicos ou locais de devolução.', binColorName: 'Ponto de Coleta', binColorHex: '#e74c3c' },
 };
@@ -55,22 +54,40 @@ function DashboardPage() {
     }
   }, [user, apiUrl]);
 
+
   useEffect(() => {
     if (history.length > 0) {
+     
+      const categoryGroupMap = {
+        'Biodegradável': 'Orgânico', 
+        'Papelão': 'Papel'      
+      };
+
+
       const counts = history.reduce((acc, item) => {
-        acc[item.material_type] = (acc[item.material_type] || 0) + 1;
+
+        const material = categoryGroupMap[item.material_type] || item.material_type;
+        
+      
+        acc[material] = (acc[material] || 0) + 1;
         return acc;
       }, {});
+      
       setMaterialCounts(counts);
 
-      const top = Object.keys(counts).reduce((a, b) => counts[a] > counts[b] ? a : b);
-      setTopMaterial(top);
+      // 3. A lógica do Top Material agora usa os dados agrupados
+      if (Object.keys(counts).length > 0) {
+        const top = Object.keys(counts).reduce((a, b) => counts[a] > counts[b] ? a : b);
+        setTopMaterial(top);
+      } else {
+        setTopMaterial(null);
+      }
 
     } else {
       setMaterialCounts({});
       setTopMaterial(null);
     }
-  }, [history]);
+  }, [history]); 
 
   const tipInfo = topMaterial ? DASHBOARD_INFO[topMaterial] : null;
 
@@ -86,6 +103,7 @@ function DashboardPage() {
       
       <div className="dashboard-grid">
         {dashboardItems.map((item) => {
+          // A contagem agora funcionará para "Orgânico" e "Papel"
           const count = materialCounts[item.title] || 0;
           return (
             <div key={item.title} className="category-card">
@@ -111,6 +129,7 @@ function DashboardPage() {
             <ul className="history-list">
               {history.map((item) => (
                 <li key={item.id_scan} className="history-item">
+                  {/* O histórico continua mostrando o nome original (ex: "Biodegradável") */}
                   <span className="history-material">{item.material_type}</span>
                   <span className="history-date">
                     {(() => {
