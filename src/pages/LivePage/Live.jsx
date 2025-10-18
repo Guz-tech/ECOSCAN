@@ -8,6 +8,7 @@ import axios from "axios";
 import { useAuth } from "../../context/AuthContex.jsx";
 import AuthRedirectModal from "../../components/AuthRedirectModal/AuthRedirectModal.jsx";
 
+
 const WASTE_INFO_MAP = {
   bottle: { categories: ["Plástico", "Vidro"], tips: [{ category: "Plástico", text: "Descarte em lixeiras de cor vermelha. Lave a garrafa para remover resíduos." },{ category: "Vidro", text: "Descarte em lixeiras de cor verde. Embale cacos em jornal para evitar acidentes." }] },
   cup: { categories: ["Plástico", "Vidro", "Metal"], tips: [{ category: "Plástico", text: "Descarte em lixeiras de cor vermelha. Verifique se não há líquidos." },{ category: "Vidro", text: "Descarte em lixeiras de cor verde. Tenha cuidado se estiver quebrado." },{ category: "Metal", text: "Descarte em lixeiras de cor amarela. Amasse para reduzir o volume." }] },

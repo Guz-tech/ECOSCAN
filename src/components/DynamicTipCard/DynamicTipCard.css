@@ -1,0 +1,56 @@
+.tip-card-section {
+  width: 100%;
+  max-width: 1000px;
+  background-color: #f1c40f; /* Amarelo para destaque */
+  color: #3d3d3d; 
+  border-radius: 15px;
+  padding: 1.5rem 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+.tip-card-icon {
+  font-size: 2.5rem;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.tip-card-content h3 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.tip-card-content p {
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+}
+
+.tip-card-content span {
+  font-style: italic;
+  font-size: 1rem;
+}
+
+.tip-card-bin-info {
+  margin-top: 1rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.tip-card-bin-info svg {
+  font-size: 1.5rem;
+}
+@media (max-width: 600px) {
+  .tip-card-section {
+    flex-direction: column;
+    text-align: center;
+    padding: 1.5rem;
+  }
+}

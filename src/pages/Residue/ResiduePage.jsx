@@ -24,6 +24,16 @@ const traducaoClasses = { 'plastic': 'Plástico', 'paper': 'Papel', 'cardboard':
 const infoPadrao = { color: 'Cinza', mensagem: 'Este resíduo é considerado rejeito e não deve ser descartado na coleta seletiva. Deposite-o no lixo comum. Isso inclui lixo de banheiro, fraldas e absorventes.' };
 const coresCss = { 'Vermelho': '#e74c3c', 'Azul': '#3498db', 'Verde': '#2ecc71', 'Amarelo': '#f1c40f', 'Marrom': '#964B00', 'Cinza': '#95a5a6' };
 
+
+// --- Nova função para converter o arquivo para Base64 ---
+const toBase64 = file => new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = error => reject(error);
+});
+
+
 function ResiduePage() {
     const navigate = useNavigate();
     const { user } = useAuth();
@@ -59,16 +69,29 @@ function ResiduePage() {
         }
     };
 
+    // --- Função handleUpload totalmente refeita ---
     const handleUpload = async () => {
         if (!file) return;
         setLoading(true);
         setError(null);
-        const formData = new FormData();
-        formData.append('file', file);
+
         try {
+            // 1. Converte a imagem para Base64
+            const base64Image = await toBase64(file);
+
             const apiKey = import.meta.env.VITE_ROBOFLOW_API_KEY;
             if (!apiKey) throw new Error("Chave de API não configurada.");
-            const response = await axios.post(`https://detect.roboflow.com/waste-classification-uwqfy/1?api_key=${apiKey}`, formData, { headers: { 'Content-Type': 'multipart/form-data' } });
+            
+            // 2. Monta a URL da API
+            const url = `https://detect.roboflow.com/waste-classification-uwqfy/1?api_key=${apiKey}`;
+
+            // 3. Envia a string Base64 no corpo da requisição
+            const response = await axios.post(url, base64Image, {
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                }
+            });
+
             const prediction = response.data.predictions[0];
             if (prediction) {
                 const classeDetectada = prediction.class.toLowerCase();
@@ -84,7 +107,12 @@ function ResiduePage() {
                 setError('Nenhum objeto foi detectado na imagem. Tente outra foto.');
             }
         } catch (err) {
-            setError(`Erro ao analisar a imagem: ${err.message}`);
+            if (err.response) {
+                setError(`Erro ${err.response.status}: ${err.response.data.message || 'O servidor da Roboflow retornou um erro.'}`);
+            } else {
+
+                setError(`Erro ao analisar a imagem: ${err.message}`);
+            }
         } finally {
             setLoading(false);
         }
